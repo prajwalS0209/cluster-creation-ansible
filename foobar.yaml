@@ -115,7 +115,7 @@
       command: kubeadm init
 
     - name: creating the directory
-      command: mkdir -p $HOME/.kube
+      command: sudo mkdir $HOME/.kube/
 
     - name: copying the file 
       command:  cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
