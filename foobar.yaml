@@ -102,7 +102,8 @@
   tasks: 
 
     - name: configuration message 
-      command: echo "working "
+      debug:
+        msg:  working......
 
     - name: enabling the kubelet 
       command: systemctl enable kubelet
