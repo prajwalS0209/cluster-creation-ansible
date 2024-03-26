@@ -1,5 +1,5 @@
 ---
-##Coomman tasks 
+##Comman tasks 
 - name: creating the common components  using anisble 
   hosts: servers
   gather_facts: no
@@ -13,7 +13,7 @@
       command:  yum install -y yum-utils containerd.io 
       
     - name: removing the congif.toml file 
-      commmand:  rm -rf /etc/containerd/config.toml
+      command:  rm -rf /etc/containerd/config.toml
 
     - name: enabling and restarting containerd
       command:  systemctl enable containerd &&  systemctl start containerd
@@ -147,6 +147,7 @@
     - name: success message 
       debug: 
         msg: node joined the cluster successfully
+
 
   
 
