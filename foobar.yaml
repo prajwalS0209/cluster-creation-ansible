@@ -100,6 +100,10 @@
   become: yes
 
   tasks: 
+
+    - name: configuration message 
+      command: echo "working "
+      
     - name: initializing kubeadm 
       command: kubeadm init
 
