@@ -81,10 +81,13 @@
       command: echo '1' > /proc/sys/net/ipv4/ip_forward
 
     - name: installing the nfs 
-      command:  yum install nfs-utils -y
+      command:  yum install -y nfs-utils
       
+    - name: starting the nfs
+      command: systemctl start nfs-server rpcbind
+
     - name: enabling the nfs
-      command: systemctl enable nfs
+      command: systemctl enable nfs-server rpcbind
 
     - name: success message 
       debug: 
