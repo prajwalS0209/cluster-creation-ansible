@@ -103,13 +103,16 @@
 
     - name: configuration message 
       command: echo "working "
-      
+
+    - name: enabling the kubelet 
+      command: systemctl enable kubelet
+
+    - name:  restarting the kubelet 
+      command: systemctl restart kubelet
+
     - name: initializing kubeadm 
       command: kubeadm init
 
-    - name: enabling the kubelet 
-      command: systemctl enable kubelet &&  systemctl status kubelet
-      
     - name: creating the directory
       command: mkdir -p $HOME/.kube
 
