@@ -1,6 +1,6 @@
 ---
 ##Comman tasks 
-- name: creating the common components  using anisble 
+- name: creating the common components  using ansible 
   hosts: servers
   gather_facts: no
   become: yes
