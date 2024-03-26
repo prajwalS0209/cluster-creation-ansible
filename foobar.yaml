@@ -6,11 +6,14 @@
   become: yes
 
   tasks: 
+    - name: installing utilities for containerd in master and worker .
+      command:  yum install -y yum-utils 
+
     - name: adding Containerd repo on Master Node and all Worker Nodes.
       command:  yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
     - name: installing utilities for containerd in master and worker .
-      command:  yum install -y yum-utils containerd.io 
+      command:  yum install -y containerd.io 
       
     - name: removing the congif.toml file 
       command:  rm -rf /etc/containerd/config.toml
