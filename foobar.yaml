@@ -106,7 +106,7 @@
     - name: copying the file 
       command:  cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 
-    - name: changing the file permssion
+    - name: changing the file permssion 
       command: chown $(id -u):$(id -g) $HOME/.kube/config
 
     - name: applying the weave network
