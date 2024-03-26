@@ -15,8 +15,11 @@
     - name: removing the congif.toml file 
       command:  rm -rf /etc/containerd/config.toml
 
-    - name: enabling and restarting containerd
-      command:  systemctl enable containerd &&  systemctl start containerd
+    - name: enabling   containerd
+      command:  systemctl enable containerd 
+      
+    - name: starting the conatinerd 
+      command:  systemctl start containerd
 
     - name: printing the status of containerd 
       command:  systemctl status containerd
