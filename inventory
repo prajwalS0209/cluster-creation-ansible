@@ -1,12 +1,14 @@
-[servers]
-172.31.6.33
-172.31.10.226
+[all]
+master ansible_host=172.31.6.33
+worker1 ansible_host=172.31.10.226
+; worker2 ansible_host=your_worker2_ip_address
 
-[master] 
-172.31.6.33
+[master_node]
+master ansible_host=172.31.6.33
 
-[worker]
-172.31.10.226
+[worker_nodes]
+worker1 ansible_host=172.31.10.226
+; worker2 ansible_host=your_worker2_ip_address
 
 [all:vars]
 ; ansible_connection=ssh

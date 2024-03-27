@@ -1,7 +1,7 @@
 ---
 ##Comman tasks 
 - name: creating the common components  using ansible 
-  hosts: servers
+  hosts: all
   gather_facts: no
   become: yes
 
@@ -98,7 +98,7 @@
 
 ###Master node tasks 
 - name: creating the master components  using anisble 
-  hosts: master
+  hosts: master_node
   gather_facts: no
   become: yes
 
@@ -167,7 +167,7 @@
 
 # Worker node tasks
 - name: creating worker node components
-  hosts: worker 
+  hosts: worker_nodes
   become: yes
   gather_facts: no
 
