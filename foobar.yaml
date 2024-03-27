@@ -172,9 +172,9 @@
   gather_facts: no
 
   tasks: 
-  - name: Using the value generated on master node
-    command: " {{ hostvars['master]['master_generated_value'] }}"
+    - name: Using the value generated on master node
+      shell: "{{ hostvars['master]['master_generated_value'] }}"
 
-  - name: Success message for worker node joining
-    debug:
-      msg: "Node joined the cluster successfully"
+    - name: Success message for worker node joining
+      debug:
+        msg: "Node joined the cluster successfully"
