@@ -1,44 +1,19 @@
-# Setting Up Scripts for Password-less or Password-Enabled SSH Connection
+# Kubernetes Cluster Security Configuration
 
-This README provides instructions for setting up scripts for establishing SSH connections with password-less or password-enabled authentication. It assumes you have one master and one slave node.
+## Slave Configuration
 
-## Prerequisites
+- **NodePort Ports:** 30000 - 32767/TCP
+- **Kubelet API:** 10248 - 10260/TCP
+- **Weave Net Port (UDP):** 6784
+- **Weave Net Port (TCP):** 6783
+- **SSH Connection:** 22/SSH
 
-- Master and slave nodes accessible over SSH
-- Basic knowledge of SSH and shell scripting
+## Master Configuration
 
-## Instructions
-
-1. **Generate SSH Key (Optional)**:
-
-    If you want to set up password-less SSH authentication:
-    
-    ```bash
-    ssh-keygen -t rsa
-    ```
-
-    Follow the prompts to generate SSH keys. 
-
-2. **Copy SSH Key to Master and Slave**:
-
-    If using password-less SSH, copy the public key to the master and slave nodes:
-    
-    ```bash
-    ssh-copy-id <user>@<master_node>
-    ssh-copy-id <user>@<slave_node>
-    ```
-
-    Replace `<user>` with your username and `<master_node>` and `<slave_node>` with the IP addresses or hostnames of your master and slave nodes.
-
-3. **Test SSH Connection**:
-
-    Ensure that you can SSH to the master and slave nodes without entering a password:
-    
-    ```bash
-    ssh <user>@<master_node>
-    ssh <user>@<slave_node>
-    ```
-
-4. **Run Scripts**:
-
-    You can now use the provided scripts for your tasks, ensuring that they establish SSH connections as required. If your scripts need password-less SSH, ensure that they use SSH keys for authentication. If password-enabled SSH is required, ensure that your scripts handle password prompts appropriately.
+- **Weave Net Port (UDP):** 6784
+- **Weave Net Port (TCP):** 6783
+- **NodePorts:** 30000 - 32767/TCP
+- **etcd Server:** 2379 - 2380/TCP
+- **Kubernetes API Server:** 6443/TCP
+- **Kubernetes Tools:** 10248 - 10260/TCP
+- **SSH Connection:** 22/SSH

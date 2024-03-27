@@ -1,5 +1,5 @@
 ---
-##Comman tasks 
+##Comman tasks used in master and slave nodes
 - name: creating the common components  using ansible 
   hosts: all
   gather_facts: no
@@ -79,7 +79,7 @@
 
     - name: enabling the kernel module 
       command:  modprobe overlay
-      
+
     - name:  setting up the sysctl 
       command:  sysctl --system
 
