@@ -156,6 +156,10 @@
       command: cat /root/.kube/join_command
       register: join_command
 
+    - name: Setting a fact with the join_command
+      set_fact:
+        master_generated_value: "{{ join_command.stdout }}"
+
     - name: Success message for master components creation
       debug:
         msg: "Successfully created the master components"
@@ -168,8 +172,8 @@
   gather_facts: no
 
   tasks: 
-  - name: Joining the worker node to the cluster
-    command: "{{ join_command.stdout }}"
+  - name: Using the value generated on master node
+    command: " {{ hostvars['master]['master_generated_value'] }}"
 
   - name: Success message for worker node joining
     debug:
