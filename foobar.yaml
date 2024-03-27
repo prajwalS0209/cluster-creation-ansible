@@ -114,6 +114,12 @@
     - name:  restarting the kubelet 
       command: systemctl restart kubelet
 
+    - name: enabling the kernel module
+      command: modprobe br_netfilter
+
+    - name: enabling the kernel module 
+      command:  modprobe overlay
+
     - name: initializing kubeadm 
       command: kubeadm init
 
