@@ -148,7 +148,7 @@
       register: token_output
 
     - name: Exporting the join command
-      shell: kubeadm token create --print-join-command < /root/.kube/token > /root/.kube/join_command
+      shell: kubeadm token create --print-join-command > /root/.kube/join_command
       args:
         executable: /bin/bash
 
