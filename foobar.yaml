@@ -36,10 +36,10 @@
         block:  |
           [kubernetes]
           name=Kubernetes
-          baseurl=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/
+          baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
           enabled=1
           gpgcheck=1
-          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/repodata/repomd.xml.key
+          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
 
     - name: installing kubernetes dependencies.
       command:  yum install -y kubelet kubectl kubeadm
@@ -74,6 +74,12 @@
           net.bridge.bridge-nf-call-ip6tables = 1
           net.bridge.bridge-nf-call-iptables = 1
 
+    - name: enabling the kernel module
+      command: modprobe br_netfilter
+
+    - name: enabling the kernel module 
+      command:  modprobe overlay
+      
     - name:  setting up the sysctl 
       command:  sysctl --system
 
@@ -112,12 +118,6 @@
 
     - name:  restarting the kubelet 
       command: systemctl restart kubelet
-
-    - name: enabling the kernel module
-      command: modprobe br_netfilter
-
-    - name: enabling the kernel module 
-      command:  modprobe overlay
 
     - name: initializing kubeadm 
       command: kubeadm init
