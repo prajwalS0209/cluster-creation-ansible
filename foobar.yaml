@@ -5,7 +5,7 @@
   gather_facts: no
   become: yes
 
-  tasks: 
+  tasks:
     - name: installing utilities for containerd in master and worker .
       command:  yum install -y yum-utils 
 
@@ -48,9 +48,9 @@
       blockinfile:
         path: /etc/hosts
         block:  |
-          172.31.6.33 master-node
-          172.31.10.226 slave-1
-          172.31.15.20 slave-2
+          {{ master }} master-node
+          {{ worker1 }}  slave-1
+          {{ worker2 }} slave-2
 
     - name: disabling the swap.
       command:  sed -i '/swap/d' /etc/fstab
@@ -174,7 +174,10 @@
   tasks: 
     - name: Using the value generated on master node
       command: "{{ hostvars['master']['join_command']['stdout'] }}"
-
+    
+    - name: restarting the kubleet service 
+      command: sudo systemctl restart  kubelet.service
+      
     - name: Success message for worker node joining
       debug:
         msg: "Node joined the cluster successfully"

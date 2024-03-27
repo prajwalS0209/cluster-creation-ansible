@@ -1,13 +1,13 @@
 [all]
-master ansible_host=172.31.6.33
-worker1 ansible_host=172.31.10.226
+master ansible_host=172.31.0.156
+worker1 ansible_host=172.31.6.36
 ; worker2 ansible_host=worker2_ip_address
 
 [master_node]
-master ansible_host=172.31.6.33
+master ansible_host=172.31.0.156
 
 [worker_nodes]
-worker1 ansible_host=172.31.10.226
+worker1 ansible_host=172.31.6.36
 ; worker2 ansible_host=worker2_ip_address
 
 [all:vars]
@@ -15,6 +15,3 @@ worker1 ansible_host=172.31.10.226
 ; ansible_ssh_user=
 ; ansible_ssh_pass=an@1ytt1c@#!
 ; ansible_sudo_pass=an@1ytt1c@#!
-; master-ip=172.31.34.223 
-; slave-1-ip=172.31.46.52
-; slave-2-ip=172.31.44.164
