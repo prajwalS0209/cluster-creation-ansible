@@ -170,9 +170,7 @@
   tasks: 
   - name: Joining the worker node to the cluster
     command: "{{ join_command.stdout }}"
-    become: true
-    become_user: root
 
-- name: Success message for worker node joining
-  debug:
-    msg: "Node joined the cluster successfully"
+  - name: Success message for worker node joining
+    debug:
+      msg: "Node joined the cluster successfully"
