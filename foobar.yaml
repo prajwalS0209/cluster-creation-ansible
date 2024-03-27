@@ -77,8 +77,11 @@
     - name:  setting up the sysctl 
       command:  sysctl --system
 
-    - name: echoing the file 
-      command: echo '1' > /proc/sys/net/ipv4/ip_forward
+    - name: Ensure IP forwarding is enabled
+      sysctl:
+        name: net.ipv4.ip_forward
+        value: 1
+        state: present
 
     - name: installing the nfs 
       command:  yum install -y nfs-utils
