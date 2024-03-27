@@ -173,7 +173,7 @@
 
   tasks: 
     - name: Using the value generated on master node
-      shell: "{{ hostvars['master]['master_generated_value'] }}"
+      command: "{{ hostvars['master']['join_command']['stdout'] }}"
 
     - name: Success message for worker node joining
       debug:
