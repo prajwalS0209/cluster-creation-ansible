@@ -1,14 +1,12 @@
 [servers]
 172.31.6.33
 172.31.10.226
-172.31.15.20
 
 [master] 
 172.31.6.33
 
 [worker]
 172.31.10.226
-172.31.15.20
 
 [all:vars]
 ; ansible_connection=ssh
