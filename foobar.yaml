@@ -103,7 +103,6 @@
   become: yes
 
   tasks: 
-
     - name: configuration message 
       debug:
         msg:  working......
@@ -144,36 +143,36 @@
     - name: exporting the file 
       command: exportfs -rav
 
-    - name: creating the token
-      command:  kubeadm token generate > /root/.kube/token
+    - name: Creating the token
+      command: kubeadm token generate
+      register: token_output
 
-    - name: exporting the join command 
-      command:  kubeadm token create $(</root/.kube/token) --print-join-command > /root/.kube/join_command
+    - name: Exporting the join command
+      shell: kubeadm token create --print-join-command < /root/.kube/token > /root/.kube/join_command
+      args:
+        executable: /bin/bash
 
-    - name: registering the join command 
+    - name: Registering the join command
       command: cat /root/.kube/join_command
       register: join_command
 
-    - name: displaying 
-      command:  kubeadm token generate > /root/.kube/token
+    - name: Success message for master components creation
+      debug:
+        msg: "Successfully created the master components"
 
-    - name: success message 
-      debug: 
-        msg: successfully created the master components 
 
-##Worker node tasks 
-- name: creating the worker components using  
-  gather_facts: no
+# Worker node tasks
+- name: creating worker node components
   hosts: worker 
   become: yes
+  gather_facts: no
+
   tasks: 
-    - name: joining the node to the cluster
-      command: "{{ join_command }}"
+  - name: Joining the worker node to the cluster
+    command: "{{ join_command.stdout }}"
+    become: true
+    become_user: root
 
-    - name: success message 
-      debug: 
-        msg: node joined the cluster successfully
-
-
-  
-
+- name: Success message for worker node joining
+  debug:
+    msg: "Node joined the cluster successfully"
