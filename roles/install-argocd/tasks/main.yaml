@@ -18,7 +18,7 @@
 
   - name:  getting the hostname 
     command: hostname -I | awk '{print $1}'
-    reagister: host_ip
+    register: host_ip
 
   - name: printing the url for acccessing the argocd UI
     debug: 
