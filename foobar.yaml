@@ -164,6 +164,11 @@
       debug:
         msg: "Successfully created the master components"
 
+  handlers:
+    - name: install argocd 
+      include_role:
+        name: install-argocd
+
 
 # Worker node tasks
 - name: creating worker node components
@@ -182,6 +187,6 @@
       debug:
         msg: "Node joined the cluster successfully"
 
-    - name: creating the argocd 
-      include_role:
-        name: install-argocd
+    - name: notifying the master to install the argocd 
+      notify: 
+        - install argocd 
