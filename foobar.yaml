@@ -164,10 +164,14 @@
       debug:
         msg: "Successfully created the master components"
 
-  handlers:
-    - name: install argocd 
-      include_role:
-        name: install-argocd
+    - name: check for confirmation 
+      wait_for:
+        path: /tmp/slave_joined.txt
+        state: present
+
+    - name: install the argocd 
+      include_role: 
+        - install-argocd
 
 
 # Worker node tasks
@@ -186,7 +190,7 @@
     - name: Success message for worker node joining
       debug:
         msg: "Node joined the cluster successfully"
-
+  
+  handlers: 
     - name: notifying the master to install the argocd 
-      notify: 
-        - install argocd 
+      command: echo "Slave has joined" >> /tmp/slave_joined.txt
