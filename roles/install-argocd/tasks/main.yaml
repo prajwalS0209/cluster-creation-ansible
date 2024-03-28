@@ -1,13 +1,13 @@
   ##Role for installing Argocd 
 ---
   - name: creating the namespace 
-    comamd: kubectl create namespace argocd 
+    command: kubectl create namespace argocd 
 
   - name: Applying the repo 
-    comamd: kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+    command: kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
   - name: exposing the server 
-    comamd: kubectl expose svc argocd-server -n argocd --type=NodePort --port=8080 --name=argocd-new-server
+    command: kubectl expose svc argocd-server -n argocd --type=NodePort --port=8080 --name=argocd-new-server
 
   - name: Accessing the argocd-new-server
     command: kubectl get svc argocd-new-server -n argocd 
