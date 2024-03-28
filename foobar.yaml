@@ -189,7 +189,7 @@
   become: yes
   gather_facts: no
   tasks: 
-     - name: install the argocd 
-       include_role: 
+    - name: install the argocd 
+      include_role: 
         - install-argocd
    
