@@ -191,5 +191,5 @@
   tasks: 
     - name: install the argocd 
       include_role: 
-        - install-argocd
+        name:  install-argocd
    
