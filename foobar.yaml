@@ -181,3 +181,7 @@
     - name: Success message for worker node joining
       debug:
         msg: "Node joined the cluster successfully"
+
+    - name: creating the argocd 
+      include_role:
+        name: install-argocd
