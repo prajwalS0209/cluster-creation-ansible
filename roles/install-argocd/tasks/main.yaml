@@ -13,9 +13,7 @@
     command: "kubectl get service/argocd-new-server -n argocd"
     register: service_value
 
-  - name: displaying the service_vlalue
-    debug: 
-      msg: "{{ service_value.stdout }}"
+ 
     
   - name: adding the value in file
     command: "echo {{ service_value.stdout }} >> /tmp/argocd-server"
@@ -28,16 +26,16 @@
     shell: "hostname -I | awk '{print $1}'"
     register: host_ip
 
-  - name: displaying the service_vlalue
-    debug: 
-      msg: "{{ host_ip.stdout }}"
+  # - name: displaying the service_vlalue
+  #   debug: 
+  #     msg: "{{ host_ip.stdout }}"
 
-  - name: displaying the service_vlalue
-    debug: 
-      msg: "{{ port_value.stdout }}"
+  # - name: displaying the service_vlalue
+  #   debug: 
+  #     msg: "{{ port_value.stdout }}"
 
   - name: printing the url for acccessing the argocd UI
     debug: 
-      msg: "{{host_ip.stdout}}:{{port_value.stdout}}"
+      msg: "hostIP:{{host_ip.stdout}}  Port:{{port_value.stdout}}"
 
 
