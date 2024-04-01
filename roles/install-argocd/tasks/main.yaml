@@ -10,7 +10,7 @@
     command: kubectl expose svc argocd-server -n argocd --type=NodePort --port=8080 --name=argocd-new-server
 
   - name: Accessing the argocd-new-server
-    command: "kubectl get service argocd-new-server -n argocd  > /tmp/argocd-server"
+    shell: "kubectl get service argocd-new-server -n argocd  > /tmp/argocd-server"
 
   - name: filtering the output to port
     shell: cat /tmp/argocd-server | awk 'NR==2 {print $5}'
