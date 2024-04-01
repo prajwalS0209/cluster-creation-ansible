@@ -15,7 +15,7 @@
 
   - name: creating the file 
     command: "touch /tmp/argocd-server"
-    
+
   - name: adding the value in file
     command: "echo {{ service_value.stdout }} > /tmp/argocd-server"
 
@@ -27,13 +27,13 @@
     shell: "hostname -I | awk '{print $1}'"
     register: host_ip
 
-  # - name: displaying the service_vlalue
-  #   debug: 
-  #     msg: "{{ host_ip.stdout }}"
+  - name: displaying the service_vlalue
+    debug: 
+      msg: "{{ host_ip.stdout }}"
 
-  # - name: displaying the service_vlalue
-  #   debug: 
-  #     msg: "{{ port_value.stdout }}"
+  - name: displaying the service_vlalue
+    debug: 
+      msg: "{{ port_value.stdout }}"
 
   - name: printing the url for acccessing the argocd UI
     debug: 
