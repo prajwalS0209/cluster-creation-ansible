@@ -1,4 +1,4 @@
-# Kubernetes Cluster Security Configuration
+# Kubernetes Cluster Network Configuration
 
 ## Slave Configuration
 
