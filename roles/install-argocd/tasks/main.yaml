@@ -13,6 +13,9 @@
     command: "kubectl get service argocd-new-server -n argocd"
     register: service_value
 
+  - name: creating the file 
+    command: "touch /tmp/argocd-server"
+    
   - name: adding the value in file
     command: "echo {{ service_value.stdout }} > /tmp/argocd-server"
 
