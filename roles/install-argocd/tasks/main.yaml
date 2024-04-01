@@ -11,7 +11,7 @@
 
   - name: Accessing the argocd-new-server
     command: kubectl get service/argocd-new-server -n argocd
-    register: service
+    register: service_value
     
   - name: adding the value in file
     command: "{{service_value.stdout}} > /tmp/argocd-server"
