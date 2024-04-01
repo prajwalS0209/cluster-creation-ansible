@@ -21,7 +21,7 @@
     command: "echo {{ service_value.stdout }} >> /tmp/argocd-server"
 
   - name: filtering the output to port
-    command: cat /tmp/argocd-server | awk '{split($5, a, ":"); split(a[2], b, "/"); print b[1]}'
+    shell: cat /tmp/argocd-server | awk '{split($5, a, ":"); split(a[2], b, "/"); print b[1]}'
     register: port_value
 
   - name:  getting the hostname 
