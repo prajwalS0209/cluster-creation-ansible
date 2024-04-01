@@ -28,8 +28,16 @@
     shell: "hostname -I | awk '{print $1}'"
     register: host_ip
 
+  - name: displaying the service_vlalue
+    debug: 
+      msg: "{{ host_ip.stdout }}"
+
+  - name: displaying the service_vlalue
+    debug: 
+      msg: "{{ port_value.stdout }}"
+
   - name: printing the url for acccessing the argocd UI
     debug: 
-      msg: "{{host_ip}}:{{port_value}}"
+      msg: "{{host_ip.stdout}}:{{port_value.stdout}}"
 
 
