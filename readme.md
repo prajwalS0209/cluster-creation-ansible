@@ -17,3 +17,5 @@
 - **Kubernetes API Server:** 6443/TCP
 - **Kubernetes Tools:** 10248 - 10260/TCP
 - **SSH Connection:** 22/SSH
+
+![alt text](https://github.com/prajwalS0209/cluster-creation-ansible/blob/main/Screenshot%202024-03-27%20at%201.14.51%20PM.png)
