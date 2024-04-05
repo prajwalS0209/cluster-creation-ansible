@@ -1,0 +1,13 @@
+---
+- name: changing the file permissions 
+  command: chmod 700 /tmp/join_command.sh
+
+- name: running the join_command.s file for joining the cluster
+  command: "sh /tmp/join_command.sh"
+
+- name: restarting the kubelet service 
+  command: sudo systemctl restart  kubelet.service
+  
+- name: Success message for worker node joining
+  debug:
+    msg: "Node joined the cluster successfully"

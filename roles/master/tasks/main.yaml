@@ -47,8 +47,10 @@
   register: join_command
 
 - name: Setting a fact with the join_command
-  set_fact:
-    master_generated_value: "{{ join_command.stdout }}"
+  shell:  "{{ join_command.stdout }} > /tmp/join_command.sh"
+
+- name: passing the file to worker node
+  shell:  scp /tmp/join_command.sh root@{{ hostvars['master']['ansible_host'] }}:/tmp/
 
 - name: Success message for master components creation
   debug:
