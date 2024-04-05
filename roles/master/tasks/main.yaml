@@ -47,10 +47,16 @@
   register: join_command
 
 - name: Setting a fact with the join_command
-  shell:  "{{ join_command.stdout }} > /tmp/join_command.sh"
+  shell:  "echo {{ join_command.stdout }} > /tmp/join_command.sh"
+
+# - name: passing the file to worker node
+#   shell:  scp /tmp/join_command.sh centos@{{ hostvars[item]['ansible_host'] }}:/tmp/
+#   with_items: "{{ groups['worker_nodes'] }}"
 
 - name: passing the file to worker node
-  shell:  scp /tmp/join_command.sh root@{{ hostvars['master']['ansible_host'] }}:/tmp/
+  debug:
+    msg:  "workernodes: {{ item }}"
+  with_items: "{{ groups['worker_nodes'] }}"
 
 - name: Success message for master components creation
   debug:
