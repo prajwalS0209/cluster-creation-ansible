@@ -1,0 +1,55 @@
+---
+- name: configuration message 
+  debug:
+    msg:  working......
+
+- name: enabling the kubelet 
+  command: systemctl enable kubelet
+
+- name:  restarting the kubelet 
+  command: systemctl restart kubelet
+
+- name: initializing kubeadm 
+  command: kubeadm init
+
+- name: creating the directory
+  command:  mkdir $HOME/.kube/
+
+- name: copying the file 
+  command:  cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+
+# - name: changing the file permssion 
+#   command: chown $(id -u):$(id -g) $HOME/.kube/config
+
+- name: applying the weave network
+  command: kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+
+- name: creating the rdatanfs folder 
+  command: mkdir -p /mnt/rdatanfs
+
+- name: exporting rdata nfs
+  command: echo "/mnt/rdatanfs *(rw,sync,no_root_squash,insecure)" > /etc/exports
+
+- name: exporting the file 
+  command: exportfs -rav
+
+- name: Creating the token
+  command: kubeadm token generate
+  register: token_output
+
+- name: Exporting the join command
+  shell: kubeadm token create --print-join-command > /root/.kube/join_command
+  args:
+    executable: /bin/bash
+
+- name: Registering the join command
+  command: cat /root/.kube/join_command
+  register: join_command
+
+- name: Setting a fact with the join_command
+  set_fact:
+    master_generated_value: "{{ join_command.stdout }}"
+
+- name: Success message for master components creation
+  debug:
+    msg: "Successfully created the master components"

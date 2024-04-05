@@ -1,0 +1,96 @@
+---
+- name: installing utilities for containerd in master and worker .
+  command:  yum install -y yum-utils 
+
+- name: adding Containerd repo on Master Node and all Worker Nodes.
+  command:  yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+- name: installing utilities for containerd in master and worker .
+  command:  yum install -y containerd.io 
+  
+- name: removing the congif.toml file 
+  command:  rm -rf /etc/containerd/config.toml
+
+- name: enabling   containerd
+  command:  systemctl enable containerd 
+  
+- name: starting the conatinerd 
+  command:  systemctl start containerd
+
+- name: printing the status of containerd 
+  command:  systemctl status containerd
+
+- name: creating the repo file 
+  command: touch /etc/yum.repos.d/kubernetes.repo
+
+- name: adding content in the repo file 
+  blockinfile:
+    path: /etc/yum.repos.d/kubernetes.repo
+    block:  |
+      [kubernetes]
+      name=Kubernetes
+      baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
+      enabled=1
+      gpgcheck=1
+      gpgkey=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
+
+- name: installing kubernetes dependencies.
+  command:  yum install -y kubelet kubectl kubeadm
+
+# - name: setting hostname .
+#   blockinfile:
+#     path: /etc/hosts
+#     block:  |
+#       {{ master }} master-node
+#       {{ worker1 }}  slave-1
+#       {{ worker2 }} slave-2
+
+- name: disabling the swap.
+  command:  sed -i '/swap/d' /etc/fstab
+
+- name:  swapoff.
+  command: swapoff -a
+
+- name:  disabling sellinux.
+  command: setenforce 0
+
+- name:  disabling sellinux-2.
+  command: sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+
+- name:  creating conf file  
+  command: touch /etc/sysctl.d/k8s.conf
+
+- name: adding content in the conf file 
+  blockinfile:
+    path: /etc/sysctl.d/k8s.conf
+    block:  |
+      net.bridge.bridge-nf-call-ip6tables = 1
+      net.bridge.bridge-nf-call-iptables = 1
+
+- name: enabling the kernel module
+  command: modprobe br_netfilter
+
+- name: enabling the kernel module 
+  command:  modprobe overlay
+
+- name:  setting up the sysctl 
+  command:  sysctl --system
+
+- name: Ensure IP forwarding is enabled
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    state: present
+
+- name: installing the nfs 
+  command:  yum install -y nfs-utils
+  
+- name: starting the nfs
+  command: systemctl start nfs-server rpcbind
+
+- name: enabling the nfs
+  command: systemctl enable nfs-server rpcbind
+
+- name: success message 
+  debug: 
+    msg: successfully created the server components 
