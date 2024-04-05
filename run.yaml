@@ -1,3 +1,5 @@
-
-  
-  
+- name: "Deploy all  Service"
+  hosts: all
+  roles:
+    - all
+  become: yes
