@@ -13,5 +13,5 @@ worker1 ansible_host=172.31.6.36
 [all:vars]
 ; ansible_connection=ssh
 ; ansible_ssh_user=
-; ansible_ssh_pass=an@1ytt1c@#!
-; ansible_sudo_pass=an@1ytt1c@#!
+; ansible_ssh_pass=
+; ansible_sudo_pass=
